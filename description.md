@@ -5,5 +5,6 @@ However, payment interface is not considered in the project, because settling sy
 <br/><br/>The project of simulated bank has three branches of visible account. 
 Root account, Bank account and User account. User account contains CreditCard account, DebitCard account and OnlineBanking account. Each account type comes from a class. All visible account classes inherit from the base class AccountType. Base class AccountType offers several ultilities. Each account has an Interface, provides an index of functions this account type has. 
 #### Account creating
-Root account can create Bank accounts and approve CreditCard accounts application sent by Bank accounts. Bank account can create User accounts.
+Root account can create Bank accounts and approve CreditCard accounts application sent by Bank accounts. Bank accounts can create User accounts.
 #### Account Functions
+Every account is able to reset its own password. Root account manages basic data of this bank, such as interest, CreditCard info, bank asset, etc. Bank accounts mainly manage User accounts, such as reset a password of a User account, submit CreditCard application, create User accounts, view info of a User account, etc.
