@@ -9,4 +9,5 @@ Root account can create Bank accounts and approve CreditCard accounts applicatio
 Every account is able to reset its own password. Root account manages basic data of this bank, such as interest, CreditCard info, bank asset, etc. Bank accounts mainly manage User accounts, such as reset a password of a User account, submit CreditCard application, create User accounts, view info of a User account, etc. 
 Every User account is able to transfer to a CreditCard account or a DebitCard account and view its own info. CreditCard and DebitCard accounts are able to credit and debit, view transactions, etc. OnlineBanking accounts also have financial functions. 
 ### Development Technology
-We tried to describe our project in the most natural way to the IDE. We neither made it too complex nor made it too simple on purpose. The features of object-oriented programming are reflected in the program. 
+The project is written in C++. We tried to describe our project in the most natural way to the IDE. We neither made it too complex nor made it too simple on purpose. The features of object-oriented programming are reflected in the program. 
+### Module Description
