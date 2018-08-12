@@ -61,6 +61,8 @@ protected:
 
 	virtual bool reset_pwd();
 
+	bool add_account(string acc);
+
 	const std::string currentDateandTime();
 
 	int get_char(char &c);
@@ -150,6 +152,8 @@ private:
 
 	bool interest_management();
 	//Provides the management of credit/debit interest.
+
+	bool view_accounts();
 
 	virtual bool setProperties();
 	//basic service function called by constructor to initiallize some values.

@@ -4,7 +4,7 @@
 #if (INCLUDE_ACCOUNT_CLASS)
 AccountTypes::AccountTypes(string path)
 {
-	system("cls");
+	//system("cls");
 	//Clear the screen after logging in.
 
 	_path = path;
@@ -115,6 +115,20 @@ bool AccountTypes::reset_pwd()
 		cout << "Password not match." << endl;
 		return true;
 	}
+}
+
+bool AccountTypes::add_account(string acc)
+{
+	ofstream out;
+	out.open("root/accounts.rec", ios::app);
+	out << acc << endl;
+
+	out.close();
+
+	cin.clear();
+	cin.sync();
+
+	return 0;
 }
 
 /*
@@ -654,6 +668,7 @@ bool root::account_management()
 			<< "2: Credit Limit Management" << endl
 			<< "3: Interest Management" << endl
 			<< "4: Build A New Bank" << endl
+			<< "5: View Accounts" << endl
 			//<< "*: Back to Previous" << endl
 			<< "#: Go back" << endl
 			<< "Please choose a service: ";
@@ -678,6 +693,7 @@ bool root::account_management()
 #if INCLUDE_ROOT_ACCOUNT_ADDITIONAL_FEATURES
 		case '4':build_new_bank(); break;
 #endif
+		case '5':view_accounts(); break;
 		//case '*':return false;
 		case '#':return 0;			//false to previous and true to main menu.
 		default:cout << "Input error. Please input again." << endl;
@@ -1303,6 +1319,8 @@ bool root::createNewCreditCard(string card_number, string valid_date, int CVN, s
 	
 	out_f.close();
 
+	add_account(card_number);
+
 	return 0;
 
 }
@@ -1537,6 +1555,29 @@ bool root::interest_management()
 	cin.sync();
 
 	return false;
+}
+bool root::view_accounts()
+{
+	ifstream acc;
+	acc.open(find_path("accounts.rec"), ios::in);
+	if (!acc.is_open())
+	{
+		cout << "Cannot open accounts.rec." << endl;
+		return true;
+	}
+	string accs;
+	while (getline(acc, accs))
+	{
+		cout << accs << endl;
+	}
+	cout << endl;
+
+	acc.close();
+
+	cin.clear();
+	cin.sync();
+
+	return 0;
 }
 bool root::setProperties()
 {
@@ -1887,6 +1928,8 @@ bool bank::createNewDebitCard()
 		cout << "The card number is: " << card_number << "   Initial password is 000000" << endl
 			<< "Returning..." << endl;
 
+		add_account(card_number);
+
 		cin.clear();
 		cin.sync();
 
@@ -1979,6 +2022,10 @@ bool bank::createNewOnlineBankingAcc()
 		out.close();
 		
 		cout << "Completed. The initial password is 000000." << endl;
+
+		add_account(acc);
+
+		return 0;
 	}
 	else
 	{

@@ -73,6 +73,7 @@ bool FileService::Interface()
 	}
 
 #if (INCLUDE_ACCOUNT_CLASS)
+	system("cls");
 	return account->Interface();
 #endif
 

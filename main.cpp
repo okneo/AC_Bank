@@ -21,7 +21,7 @@ int main()
 	while (true)
 	{
 		cout << endl << "Please log in." << endl;
-		cout << "Account: ";
+		cout << "Account:  ";
 		cin >> account;
 		cout << "Password: ";
 		cin >> pwd;
