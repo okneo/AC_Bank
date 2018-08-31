@@ -80,7 +80,7 @@ bool AccountTypes::reset_pwd()
 	id.open(find_path("ID.cre"), ios::in);
 	if (!id.is_open())
 	{
-		cout << "Cannot access this account properly. Please check the availability of this account." << endl;
+		cout << "Cannot access this account properly. Please check the availability of this account." << endl << endl;
 		return true;
 	}
 	id >> acc_type;
@@ -101,18 +101,18 @@ bool AccountTypes::reset_pwd()
 			out << acc_type << endl;
 			out << pwd << endl;
 			out.close();
-			cout << "Password reset successfully." << endl;
+			cout << "Password reset successfully." << endl << endl;
 			return false;
 		}
 		else
 		{
-			cout << "Password not match." << endl;
+			cout << "Password not match." << endl << endl;
 			return true;
 		}
 	}
 	else
 	{
-		cout << "Password not match." << endl;
+		cout << "Password not match." << endl << endl;
 		return true;
 	}
 }
@@ -275,7 +275,7 @@ bool AccountTypes::list_credit_card()
 	in.open("PublicInfo/CreditCardTemplates/credit_cards.info", ios::in);
 	if (!in.is_open())
 	{
-		cout << "Some file missing or damaged." << endl;
+		cout << "Some file missing or damaged." << endl << endl;
 		return true;
 	}
 	struct card
@@ -310,7 +310,7 @@ bool AccountTypes::credit_card_details(string serial)
 	in.open("PublicInfo/CreditCardTemplates/" + serial + ".intro", ios::in);
 	if (!in.is_open())
 	{
-		cout << "Some file missing or damaged." << endl;
+		cout << "Some file missing or damaged." << endl << endl;
 		return true;
 	}
 	string temp_s;
@@ -335,7 +335,7 @@ bool AccountTypes::send_message(string target_acc, string msg)
 	app.open(target_acc + "/" + "message.io", ios::app);
 	if (!app.is_open())
 	{
-		cout << "The target account cannot be accessed properly. Message cannot be sent." << endl;
+		cout << "The target account cannot be accessed properly. Message cannot be sent." << endl << endl;
 		return true;
 	}
 	/*
@@ -438,7 +438,7 @@ bool AccountTypes::transfer(string from_card_number, string to_card_number, doub
 {
 	if (amount <= 0)
 	{
-		cout << "Input error. Transfer amount must be positive." << endl;
+		cout << "Input error. Transfer amount must be positive." << endl << endl;
 		return true;
 	}
 
@@ -446,7 +446,7 @@ bool AccountTypes::transfer(string from_card_number, string to_card_number, doub
 	from.open(from_card_number + "/asset.rec", ios::in);
 	if (!from.is_open())
 	{
-		cout << "Some file missing. Operation cannot be done." << endl;
+		cout << "Some file missing. Operation cannot be done." << endl << endl;
 		return true;
 	}
 
@@ -461,7 +461,7 @@ bool AccountTypes::transfer(string from_card_number, string to_card_number, doub
 		to.open(to_card_number + "/asset.rec", ios::in);
 		if (!to.is_open())
 		{
-			cout << "Target account not available or some file missing. Operation cannot be done." << endl;
+			cout << "Target account not available or some file missing. Operation cannot be done." << endl << endl;
 			return true;
 		}
 		double asset_to;
@@ -557,7 +557,7 @@ bool AccountTypes::transfer(string from_card_number, string to_card_number, doub
 	}
 	else
 	{
-		cout << "No enough balance to transfer." << endl;
+		cout << "No enough balance to transfer." << endl << endl;
 		return true;
 	}
 
@@ -715,7 +715,7 @@ bool root::publish_credit_card()
 	in.open(find_path("CreditCardInfo/CreditCard.info"), ios::in);
 	if (!in.is_open())
 	{
-		cout << "Cannot open CreditCard.info. Please check the availability of this file." << endl;
+		cout << "Cannot open CreditCard.info. Please check the availability of this file." << endl << endl;
 		return true;
 	}
 	struct card_info
@@ -750,7 +750,7 @@ bool root::publish_credit_card()
 		if (card[i].serial == temp_serial)
 		{
 			cout << "Sorry, we have already had this serial number." << endl
-				<< "Returning..." << endl;
+				<< "Returning..." << endl << endl;
 			return true;
 		}
 	}
@@ -786,7 +786,7 @@ bool root::publish_credit_card()
 	info_file.open("PublicInfo/CreditCardTemplates/credit_cards.info", ios::app);
 	if (!info_file.is_open())
 	{
-		cout << "Cannot open credit_cards.info. Check the availability of this file." << endl;
+		cout << "Cannot open credit_cards.info. Check the availability of this file." << endl << endl;
 		return true;
 	}
 	info_file << card[num - 1].serial << endl
@@ -794,7 +794,7 @@ bool root::publish_credit_card()
 	info_file.close();
 
 
-	cout << "OK. The new credit card has been added." << endl;
+	cout << "OK. The new credit card has been added." << endl << endl;
 
 	//getchar();
 	cin.clear();
@@ -813,7 +813,7 @@ bool root::financial_services_management()
 	current_f.open(find_path("asset.rec"), ios::in);
 	if (!current_f.is_open())
 	{
-		cout << "Cannot open asset.rec. Check the availability of this file." << endl;
+		cout << "Cannot open asset.rec. Check the availability of this file." << endl << endl;
 
 		cin.clear();
 		cin.sync();
@@ -830,7 +830,7 @@ bool root::financial_services_management()
 	last_f.open("PublicInfo/FinancialServices/acb.info", ios::in);
 	if (!last_f.is_open())
 	{
-		cout << "Cannot open acb.info. Check the availability of this file." << endl;
+		cout << "Cannot open acb.info. Check the availability of this file." << endl << endl;
 
 		cin.clear();
 		cin.sync();
@@ -858,7 +858,7 @@ bool root::financial_services_management()
 
 		update.close();
 
-		cout << "Returning..." << endl;
+		cout << "Returning..." << endl << endl;
 
 		cin.clear();
 		cin.sync();
@@ -867,7 +867,7 @@ bool root::financial_services_management()
 	}
 	else
 	{
-		cout << "Returning..." << endl;
+		cout << "Returning..." << endl << endl;
 		
 		cin.clear();
 		cin.sync();
@@ -943,7 +943,7 @@ bool root::credit_card_approve()
 	application.open(find_path("CreditCardApplication/applications.info"), ios::in);
 	if (!application.is_open())
 	{
-		cout << "Sorry, we cannot open applications.info properly." << endl;
+		cout << "Sorry, we cannot open applications.info properly." << endl << endl;
 
 		cin.clear();
 		cin.sync();
@@ -996,7 +996,7 @@ bool root::credit_card_approve()
 	credit.open(find_path("CreditCardInfo/CreditCard.info"), ios::in);
 	if (!credit.is_open())
 	{
-		cout << "Sorry, we cannot open CreditCard.info properly." << endl;
+		cout << "Sorry, we cannot open CreditCard.info properly." << endl << endl;
 
 		cin.clear();
 		cin.sync();
@@ -1047,7 +1047,7 @@ bool root::credit_card_approve()
 		
 		if (n == -1)
 		{
-			cout << "Returning..." << endl;
+			cout << "Returning..." << endl << endl;
 			break;
 		}
 
@@ -1163,7 +1163,7 @@ bool root::credit_card_approve()
 			}
 			else
 			{
-				cout << "Returning..." << endl;
+				cout << "Returning..." << endl << endl;
 				continue;
 			}
 		}
@@ -1238,7 +1238,7 @@ bool root::createNewCreditCard(string card_number, string valid_date, int CVN, s
 
 	if (_mkdir(temp_number) != 0)
 	{
-		cout << "Cannot make the directory." << endl;
+		cout << "Cannot make the directory." << endl << endl;
 
 		cin.clear();
 		cin.sync();
@@ -1254,7 +1254,7 @@ bool root::createNewCreditCard(string card_number, string valid_date, int CVN, s
 
 	if (_mkdir(temp_number) != 0)
 	{
-		cout << "Cannot make the directory." << endl;
+		cout << "Cannot make the directory." << endl << endl;
 
 		cin.clear();
 		cin.sync();
@@ -1339,6 +1339,9 @@ bool root::credit_limit_management()
 	string phone;
 	string address;
 	string postcode;
+
+	string temp_limit;
+
 	cout << "Please enter the credit card number: ";
 	cin >> card_number;
 
@@ -1347,7 +1350,7 @@ bool root::credit_limit_management()
 	if (!check_cre.is_open())
 	{
 		cout << "Cannot open ID.cre of account " << card_number << ". Please check the availability of this account." << endl
-			<< "Returning..." << endl;
+			<< "Returning..." << endl << endl;
 
 		cin.clear();
 		cin.sync();
@@ -1359,7 +1362,7 @@ bool root::credit_limit_management()
 	if (tmp_type != 'c')
 	{
 		cout << "Card " << card_number << " is not a credit card." << endl
-			<< "Returning..." << endl;
+			<< "Returning..." << endl << endl;
 
 		check_cre.close();
 
@@ -1379,7 +1382,7 @@ bool root::credit_limit_management()
 	if (!in.is_open())
 	{
 		cout << "Cannot open properties.info of account " << card_number << ". Please check the availability of this account." << endl
-			<< "Returning..." << endl;
+			<< "Returning..." << endl << endl;
 
 		cin.clear();
 		cin.sync();
@@ -1406,13 +1409,29 @@ bool root::credit_limit_management()
 
 	in.close();
 
+	in.open(card_number + "/credit_card.info", ios::in);
+	if (!in.is_open())
+	{
+		cout << "Cannot open credit_card.info of account " << card_number << ". Please check the availability of this account." << endl
+			<< "Returning..." << endl << endl;
+
+		cin.clear();
+		cin.sync();
+
+		return true;
+	}
+	getline(in, temp_limit);
+	getline(in, temp_limit);
+	getline(in, temp_limit);
+
+	in.close();
+
 	cout << "The current credit limit of credit card " << card_number << " is " << credit_limit << "." << endl;
 	cout << "Please enter the new limit: ";
 	cin >> credit_limit;
-	cout << "OK. The new credit limit is set to " << credit_limit << endl;
 
 	ofstream out;
-	out.open(card_number + "/properties.info", ios::in);
+	out.open(card_number + "/properties.info", ios::out);
 	out << valid_date << endl
 		<< CVN << endl
 		<< billing_date << endl
@@ -1426,7 +1445,14 @@ bool root::credit_limit_management()
 		<< postcode << endl;
 	out.close();
 
-	cout << "Returning..." << endl;
+	out.open(card_number + "/credit_card.info", ios::out);
+	out << billing_date << endl
+		<< credit_limit << endl
+		<< temp_limit << endl;
+	out.close();
+
+	cout << "OK. The new credit limit is set to " << credit_limit << endl;
+	cout << "Returning..." << endl << endl;
 
 	cin.clear();
 	cin.sync();
@@ -1456,7 +1482,7 @@ bool root::build_new_bank()
 
 	if (_mkdir(temp_number) != 0)
 	{
-		cout << "Cannot make the directory." << endl;
+		cout << "Cannot make the directory." << endl << endl;
 
 		cin.clear();
 		cin.sync();
@@ -1480,7 +1506,7 @@ bool root::build_new_bank()
 
 	out.close();
 
-	cout << "Completed. Initial password is 000000. Returning..." << endl;
+	cout << "Completed. Initial password is 000000. Returning..." << endl << endl;
 
 	cin.clear();
 	cin.sync();
@@ -1495,7 +1521,7 @@ bool root::interest_management()
 	if (!credit.is_open())
 	{
 		cout << "Cannot open CreditInterest.info. Please check the integrity of PublicInfo." << endl
-			<< "Returning..." << endl;
+			<< "Returning..." << endl << endl;
 
 		cin.clear();
 		cin.sync();
@@ -1507,7 +1533,7 @@ bool root::interest_management()
 	if (!credit.is_open())
 	{
 		cout << "Cannot open DebitInterest.info. Please check the integrity of PublicInfo." << endl
-			<< "Returning..." << endl;
+			<< "Returning..." << endl << endl;
 
 		cin.clear();
 		cin.sync();
@@ -1549,7 +1575,7 @@ bool root::interest_management()
 		out.close();
 		cout << "The debit interest is set to " << debit_interest << endl;
 	}
-	cout << "Returning..." << endl;
+	cout << "Returning..." << endl << endl;
 
 	cin.clear();
 	cin.sync();
@@ -1562,7 +1588,7 @@ bool root::view_accounts()
 	acc.open(find_path("accounts.rec"), ios::in);
 	if (!acc.is_open())
 	{
-		cout << "Cannot open accounts.rec." << endl;
+		cout << "Cannot open accounts.rec." << endl << endl;
 		return true;
 	}
 	string accs;
@@ -1688,7 +1714,7 @@ bool bank::AssociateOnlineBanking(const string & OnlineBankingAccount, const str
 	type_f.open(OnlineBankingAccount + "/ID.cre", ios::in);
 	if (!type_f.is_open())
 	{
-		cout << "Cannot load the online banking account properly. Operation cannot be done." << endl;
+		cout << "Cannot load the online banking account properly. Operation cannot be done." << endl << endl;
 
 		cin.clear();
 		cin.sync();
@@ -1701,7 +1727,7 @@ bool bank::AssociateOnlineBanking(const string & OnlineBankingAccount, const str
 
 	if (type != 'o')
 	{
-		cout << "This is not an online banking account." << endl;
+		cout << "This is not an online banking account." << endl << endl;
 
 		cin.clear();
 		cin.sync();
@@ -1717,7 +1743,7 @@ bool bank::AssociateOnlineBanking(const string & OnlineBankingAccount, const str
 	online_banking_acc.open(OnlineBankingAccount + "/properties.info", ios::in);
 	if (!online_banking_acc.is_open())
 	{
-		cout << "Cannot load the online banking account properly. Operation cannot be done." << endl;
+		cout << "Cannot load the online banking account properly. Operation cannot be done." << endl << endl;
 
 		cin.clear();
 		cin.sync();
@@ -1736,7 +1762,7 @@ bool bank::AssociateOnlineBanking(const string & OnlineBankingAccount, const str
 	type_tf.open(CardNumber + "/ID.cre", ios::in);
 	if (!type_tf.is_open())
 	{
-		cout << "Cannot load the online banking account properly. Operation cannot be done." << endl;
+		cout << "Cannot load the online banking account properly. Operation cannot be done." << endl << endl;
 
 		cin.clear();
 		cin.sync();
@@ -1773,7 +1799,7 @@ bool bank::AssociateOnlineBanking(const string & OnlineBankingAccount, const str
 		}
 		else
 		{
-			cout << "Error: The destination card does not belong to the online banking account holder." << endl;
+			cout << "Error: The destination card does not belong to the online banking account holder." << endl << endl;
 
 			cin.clear();
 			cin.sync();
@@ -1800,7 +1826,7 @@ bool bank::AssociateOnlineBanking(const string & OnlineBankingAccount, const str
 		}
 		else
 		{
-			cout << "Error: The destination card does not belong to the online banking account holder." << endl;
+			cout << "Error: The destination card does not belong to the online banking account holder." << endl << endl;
 
 			cin.clear();
 			cin.sync();
@@ -1810,7 +1836,7 @@ bool bank::AssociateOnlineBanking(const string & OnlineBankingAccount, const str
 	}
 	else
 	{
-		cout << "Unknown card type. Operation cannot be done.";
+		cout << "Unknown card type. Operation cannot be done." << endl << endl;
 
 		cin.clear();
 		cin.sync();
@@ -1886,7 +1912,7 @@ bool bank::createNewDebitCard()
 
 		if (_mkdir(temp_number) != 0)
 		{
-			cout << "Cannot make the directory." << endl;
+			cout << "Cannot make the directory." << endl << endl;
 
 			cin.clear();
 			cin.sync();
@@ -1926,7 +1952,7 @@ bool bank::createNewDebitCard()
 		out.close();
 
 		cout << "The card number is: " << card_number << "   Initial password is 000000" << endl
-			<< "Returning..." << endl;
+			<< "Returning..." << endl << endl;
 
 		add_account(card_number);
 
@@ -1938,7 +1964,7 @@ bool bank::createNewDebitCard()
 	}
 	else
 	{
-		cout << "OK. Cancelled. Returning..." << endl;
+		cout << "OK. Cancelled. Returning..." << endl << endl;
 
 		cin.clear();
 		cin.sync();
@@ -1990,7 +2016,7 @@ bool bank::createNewOnlineBankingAcc()
 
 		if (_mkdir(temp_number) != 0)
 		{
-			cout << "Cannot make the directory." << endl;
+			cout << "Cannot make the directory." << endl << endl;
 
 			cin.clear();
 			cin.sync();
@@ -2021,7 +2047,7 @@ bool bank::createNewOnlineBankingAcc()
 
 		out.close();
 		
-		cout << "Completed. The initial password is 000000." << endl;
+		cout << "Completed. The initial password is 000000." << endl << endl;
 
 		add_account(acc);
 
@@ -2029,7 +2055,7 @@ bool bank::createNewOnlineBankingAcc()
 	}
 	else
 	{
-		cout << "Rejected. Returning..." << endl;
+		cout << "Rejected. Returning..." << endl << endl;
 
 		cin.clear();
 		cin.sync();
@@ -2044,7 +2070,7 @@ bool bank::reset_user_account_pwd(string acc)
 	type_f.open(acc + "/ID.cre", ios::in);
 	if (!type_f.is_open())
 	{
-		cout << "Cannot access this account properly. Operation cannot be done." << endl;
+		cout << "Cannot access this account properly. Operation cannot be done." << endl << endl;
 
 		cin.clear();
 		cin.sync();
@@ -2068,7 +2094,7 @@ bool bank::reset_user_account_pwd(string acc)
 
 		reset.close();
 
-		cout << "Password successfully reset." << endl;
+		cout << "Password successfully reset." << endl << endl;
 
 		cin.clear();
 		cin.sync();
@@ -2078,7 +2104,7 @@ bool bank::reset_user_account_pwd(string acc)
 	}
 	else
 	{
-		cout << "Unknown account type or this account cannot be reset." << endl;
+		cout << "Unknown account type or this account cannot be reset." << endl << endl;
 
 		cin.clear();
 		cin.sync();
@@ -2093,7 +2119,7 @@ bool bank::view_account(string acc)
 	in.open(acc + "/ID.cre", ios::in);
 	if (!in.is_open())
 	{
-		cout << "Unable to access the account properly. Returning..." << endl;
+		cout << "Unable to access the account properly. Returning..." << endl << endl;
 
 		cin.clear();
 		cin.sync();
@@ -2134,7 +2160,7 @@ bool bank::view_account(string acc)
 	}
 	else
 	{
-		cout << "Unknown card type." << endl;
+		cout << "Unknown card type." << endl << endl;
 
 		cin.clear();
 		cin.sync();
@@ -2222,7 +2248,7 @@ bool bank::view_credit_acc(string acc)
 		<< "ID:           " << ID << endl
 		<< "Phone:        " << phone << endl
 		<< "Address:      " << address << endl
-		<< "Postcode:     " << postcode << endl;
+		<< "Postcode:     " << postcode << endl << endl;
 
 	cin.clear();
 	cin.sync();
@@ -2269,7 +2295,7 @@ bool bank::view_debit_acc(string acc)
 			<< "ID:       " << ID << endl
 			<< "Phone:    " << phone << endl
 			<< "Address:  " << address << endl
-			<< "Postcode: " << postcode << endl;
+			<< "Postcode: " << postcode << endl << endl;
 	}
 
 	cin.clear();
@@ -2313,6 +2339,7 @@ bool bank::view_onlinebanking_acc(string acc)
 
 		ass_acc_f.close();
 
+		cout << endl;
 	}
 
 	cin.clear();
@@ -2328,7 +2355,7 @@ bool bank::adjust_temp_credit_limit(string acc)
 	type_f.open(acc + "/ID.cre", ios::in);
 	if (!type_f.is_open())
 	{
-		cout << "Cannot access this account properly. Operation cannot be done." << endl;
+		cout << "Cannot access this account properly. Operation cannot be done." << endl << endl;
 
 		cin.clear();
 		cin.sync();
@@ -2351,7 +2378,7 @@ bool bank::adjust_temp_credit_limit(string acc)
 		credit_card_f.open(acc + "/credit_card.info", ios::in);
 		if (!credit_card_f.is_open())
 		{
-			cout << "Cannot find credit_card.info. Operation cannot be done." << endl;
+			cout << "Cannot find credit_card.info. Operation cannot be done." << endl << endl;
 
 			cin.clear();
 			cin.sync();
@@ -2378,7 +2405,7 @@ bool bank::adjust_temp_credit_limit(string acc)
 	}
 	else
 	{
-		cout << "This is not a credit card." << endl;
+		cout << "This is not a credit card." << endl << endl;
 
 		cin.clear();
 		cin.sync();
@@ -2397,7 +2424,7 @@ bool bank::apply_credit_card()
 		overall.open("PublicInfo/CreditCardTemplates/credit_cards.info", ios::in);
 		if (!overall.is_open())
 		{
-			cout << "Some file missing. Operation cannot be done." << endl;
+			cout << "Some file missing. Operation cannot be done." << endl << endl;
 
 			cin.clear();
 			cin.sync();
@@ -2505,13 +2532,13 @@ bool bank::apply_credit_card()
 			}
 			else
 			{
-				cout << "Cancelled. Returning..." << endl;
+				cout << "Cancelled. Returning..." << endl << endl;
 				continue;
 			}
 		}
 		else
 		{
-			cout << "Returning..." << endl;
+			cout << "Returning..." << endl << endl;
 			continue;
 		}
 	}
@@ -2717,7 +2744,7 @@ bool credit_card::setProperties()
 	prop.open(find_path("properties.info"), ios::in);
 	if (!prop.is_open())
 	{
-		cout << "Some file missing. The account cannot be set up." << endl;
+		cout << "Some file missing. The account cannot be set up." << endl << endl;
 
 		cin.clear();
 		cin.sync();
@@ -2756,7 +2783,7 @@ bool credit_card::setProperties()
 	prop.open(find_path("credit_card.info"), ios::in);
 	if (!prop.is_open())
 	{
-		cout << "Some file missing. The account cannot be set up." << endl;
+		cout << "Some file missing. The account cannot be set up." << endl << endl;
 
 		cin.clear();
 		cin.sync();
@@ -2882,7 +2909,7 @@ bool card::credit_or_debit(double amount)
 	asset_f.open(find_path("asset.rec"), ios::in);
 	if (!asset_f.is_open())
 	{
-		cout << "Some file misssing. Returning..." << endl;
+		cout << "Some file misssing. Returning..." << endl << endl;
 
 		cin.clear();
 		cin.sync();
@@ -2921,7 +2948,7 @@ bool card::credit_or_debit(double amount)
 			}//if there is still enough money to take out.
 			else
 			{
-				cout << "Unknown error." << endl;
+				cout << "Unknown error." << endl << endl;
 
 				cin.clear();
 				cin.sync();
@@ -2931,7 +2958,7 @@ bool card::credit_or_debit(double amount)
 		}
 		else
 		{
-			cout << "Balance exceeded." << endl;
+			cout << "Balance exceeded." << endl << endl;
 
 			cin.clear();
 			cin.sync();
@@ -3069,7 +3096,7 @@ bool card::credit_or_debit(double amount)
 	else
 	{
 		cout << "Debit " << abs(amount) << "USD" << " successfully." << endl
-			<< "Thank you very much!" << endl;
+			<< "Thank you very much!" << endl << endl;
 	}
 
 	cin.clear();
@@ -3086,7 +3113,7 @@ bool credit_card::view_bills(string date)
 	if (!asset_rec.is_open())
 	{
 		cout << "Cannot find the required bill. Maybe it does not exist or it is missing." << endl
-			<< "For more information, please contact AC Bank." << endl;
+			<< "For more information, please contact AC Bank." << endl << endl;
 
 		cin.clear();
 		cin.sync();
@@ -3106,7 +3133,7 @@ bool credit_card::view_bills(string date)
 	if (!bill.is_open())
 	{
 		cout << "Cannot find the required bill. Maybe it does not exist or it is missing." << endl
-			<< "For more information, please contact AC Bank." << endl;
+			<< "For more information, please contact AC Bank." << endl << endl;
 
 		cin.clear();
 		cin.sync();
@@ -3130,7 +3157,7 @@ bool credit_card::view_bills(string date)
 	{
 		cout << abs(asset) << "." << endl
 			<< "Minimum payment: " << abs(asset*0.1) << "." << endl
-			<< " Please pay off the minimum payment before the 5th of next month." << endl;
+			<< " Please pay off the minimum payment before the 5th of next month." << endl << endl;
 	}
 
 	cin.clear();
@@ -3152,7 +3179,7 @@ bool credit_card::view_info()
 		<< "ID:               " << ID << endl
 		<< "Phone:            " << phone << endl
 		<< "Address:          " << address << endl
-		<< "Postcode:         " << postcode << endl;
+		<< "Postcode:         " << postcode << endl << endl;
 
 	cin.clear();
 	cin.sync();
@@ -3306,7 +3333,7 @@ bool debit_card::setProperties()
 	prop.open(find_path("properties.info"), ios::in);
 	if (!prop.is_open())
 	{
-		cout << "Some file missing. Cannot set up account." << endl;
+		cout << "Some file missing. Cannot set up account." << endl << endl;
 
 		cin.clear();
 		cin.sync();
@@ -3334,7 +3361,7 @@ bool debit_card::view_info()
 		<< "ID:               " << ID << endl
 		<< "Phone:            " << phone << endl
 		<< "Address:          " << address << endl
-		<< "Postcode:         " << postcode << endl;
+		<< "Postcode:         " << postcode << endl << endl;
 
 	cin.clear();
 	cin.sync();
@@ -3349,7 +3376,7 @@ bool debit_card::view_transactions()
 	if (!bill.is_open())
 	{
 		cout << "Some file missing." << endl
-			<< "For more information, please contact AC Bank." << endl;
+			<< "For more information, please contact AC Bank." << endl << endl;
 
 		cin.clear();
 		cin.sync();
@@ -3413,7 +3440,7 @@ online_banking::online_banking(string path)
 		current_asset_f.open("root/asset.rec", ios::in);
 		if (!current_asset_f.is_open())
 		{
-			cout << "Some file missing." << endl;
+			cout << "Some file missing." << endl << endl;
 			//return true;
 		}
 		else
@@ -3574,7 +3601,7 @@ bool online_banking::setProperties()
 	cards_f.open(find_path("OnlineAccounts.exchange"), ios::in);
 	if (!cards_f.is_open())
 	{
-		cout << "Some file missing. Cannot set up the account." << endl;
+		cout << "Some file missing. Cannot set up the account." << endl << endl;
 
 		cin.clear();
 		cin.sync();
@@ -3593,7 +3620,7 @@ bool online_banking::setProperties()
 	acc_cre.open(find_path("properties.info"), ios::in);
 	if (!acc_cre.is_open())
 	{
-		cout << "Some file missing. Cannot set up the account." << endl;
+		cout << "Some file missing. Cannot set up the account." << endl << endl;
 
 		cin.clear();
 		cin.sync();
@@ -3648,6 +3675,7 @@ bool online_banking::setup_tran()
 
 	if (choice == 0)
 	{
+		cout << endl;
 
 		cin.clear();
 		cin.sync();
@@ -3659,7 +3687,7 @@ bool online_banking::setup_tran()
 	type_c.open(cards[choice - 1] + "/ID.cre", ios::in);
 	if (!type_c.is_open())
 	{
-		cout << "Cannot find the card." << endl;
+		cout << "Cannot find the card." << endl << endl;
 
 		cin.clear();
 		cin.sync();
@@ -3688,7 +3716,7 @@ bool online_banking::setup_tran()
 
 		out.close();
 
-		cout << "OK. The transaction account is not set. You may need to re-login." << endl;
+		cout << "OK. The transaction account is now set. You may need to re-login." << endl << endl;
 
 		cin.clear();
 		cin.sync();
@@ -3697,7 +3725,7 @@ bool online_banking::setup_tran()
 	}
 	else
 	{
-		cout << "Sorry, but a transaction account can only be a debit card." << endl;
+		cout << "Sorry, but a transaction account can only be a debit card." << endl << endl;
 
 		cin.clear();
 		cin.sync();
@@ -3712,7 +3740,7 @@ bool online_banking::financial()
 	root_stock_f.open("root/stock.rec", ios::in);
 	if (!root_stock_f.is_open())
 	{
-		cout << "Some file missing." << endl;
+		cout << "Some file missing." << endl << endl;
 
 		cin.clear();
 		cin.sync();
@@ -3729,7 +3757,7 @@ bool online_banking::financial()
 	balance_f.open(transaction_account + "/asset.rec", ios::in);
 	if (!balance_f.is_open())
 	{
-		cout << "Some file missing." << endl;
+		cout << "Some file missing." << endl << endl;
 
 		cin.clear();
 		cin.sync();
@@ -3746,7 +3774,7 @@ bool online_banking::financial()
 	last_asset_f.open("PublicInfo/FinancialServices/acb.info", ios::in);
 	if (!last_asset_f.is_open())
 	{
-		cout << "Some file missing." << endl;
+		cout << "Some file missing." << endl << endl;
 
 		cin.clear();
 		cin.sync();
@@ -3765,7 +3793,7 @@ bool online_banking::financial()
 	current_asset_f.open("root/asset.rec", ios::in);
 	if (!current_asset_f.is_open())
 	{
-		cout << "Some file missing." << endl;
+		cout << "Some file missing." << endl << endl;
 
 		cin.clear();
 		cin.sync();
@@ -3784,7 +3812,7 @@ bool online_banking::financial()
 	stock_num_f.open(transaction_account + "/financial.rec", ios::in);
 	if (!stock_num_f.is_open())
 	{
-		cout << "Some file missing." << endl;
+		cout << "Some file missing." << endl << endl;
 
 		cin.clear();
 		cin.sync();
@@ -3925,6 +3953,8 @@ bool online_banking::financial()
 			continue;
 		}
 	}
+
+	cout << endl;
 
 	cin.clear();
 	cin.sync();
